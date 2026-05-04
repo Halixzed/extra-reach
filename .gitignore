@@ -1,4 +1,8 @@
 *.log
+infrastructure/.terraform/
+infrastructure/.terraform.lock.hcl
+infrastructure/terraform.tfstate
+infrastructure/terraform.tfstate.backup
 .DS_Store
 .env
 .env.backup
