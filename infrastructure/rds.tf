@@ -1,6 +1,6 @@
 resource "aws_db_subnet_group" "main" {
   name       = "${var.app_name}-db-subnet"
-  subnet_ids = module.vpc.private_subnets
+  subnet_ids = module.vpc.public_subnets
 }
 
 resource "aws_security_group" "rds" {
@@ -25,6 +25,7 @@ resource "aws_db_instance" "main" {
   username               = "admin"
   password               = var.db_password
   db_subnet_group_name   = aws_db_subnet_group.main.name
+  publicly_accessible    = false
   vpc_security_group_ids = [aws_security_group.rds.id]
   skip_final_snapshot    = true
 }
