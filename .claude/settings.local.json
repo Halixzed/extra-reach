@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "PowerShell(wsl -d Ubuntu -e bash -c \"aws ecr describe-repositories --repository-names portfolio --region eu-west-2 --query 'repositories[0].repositoryUri' --output text\")"
-    ]
-  }
-}
