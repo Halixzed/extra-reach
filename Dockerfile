@@ -1,3 +1,10 @@
+FROM node:20-alpine AS assets
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
 FROM php:8.4-fpm-alpine
 
 RUN apk add --no-cache nginx supervisor curl \
@@ -7,6 +14,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 COPY . .
+COPY --from=assets /app/public/build ./public/build
 
 RUN composer install --no-dev --optimize-autoloader \
     && php artisan config:cache \
